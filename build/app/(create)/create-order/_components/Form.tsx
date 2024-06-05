@@ -143,8 +143,8 @@ function CreateOrderForm() {
                   <strong>Total Cost:</strong> {formatToDollar(tCost)}
                 </p>
                 <p className="text-red-500 text-xs font-semibold">
-                  You will be automatically charged when the order is picked up
-                  by an organization.
+                  Once claimed, you will be prompted to pay the donation amount
+                  to the fundraising organization.
                 </p>
               </div>
             </section>

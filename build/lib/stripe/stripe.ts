@@ -121,6 +121,11 @@ export async function transferToConnectedAccount(
   return transfer;
 }
 
+export async function retrievePaymentIntent(intent: string) {
+  const paymentIntent = await stripe.paymentIntents.retrieve(intent);
+  return paymentIntent;
+}
+
 export async function setUpCheckout(customer: string) {
   // Get the current base
   console.log(process.env.NEXT_PUBLIC_URL);

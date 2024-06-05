@@ -12,6 +12,7 @@ import {
   createStripeAccountOnboardingLink,
   fetchAccount,
   initiateCheckout,
+  retrievePaymentIntent,
   transferToConnectedAccount,
 } from "./stripe/stripe";
 import {
@@ -161,11 +162,17 @@ export async function orderComplete(
     throw Error("No payment intent found");
   }
   try {
+    const charge = await retrievePaymentIntent(
+      orderObject.transactions.payment_intent
+    );
+    if (!charge.latest_charge) {
+      throw Error("Charge doesnt exists");
+    }
     await transferToConnectedAccount(
       stripe_account,
       amount,
       transaction,
-      orderObject.transactions.payment_intent
+      charge.latest_charge.toString()
     );
     const response = await supabase
       .from("orders")
