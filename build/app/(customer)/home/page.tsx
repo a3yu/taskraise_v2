@@ -1,3 +1,4 @@
+"use server";
 import React from "react";
 import SwitchDisplay from "./_components/SwitchDisplay";
 import { getCustomerData } from "@/lib/ordersAdmin";

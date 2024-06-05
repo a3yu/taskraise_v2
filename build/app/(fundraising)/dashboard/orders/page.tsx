@@ -1,3 +1,4 @@
+"use server";
 import { getOrganizationData } from "@/lib/ordersAdmin";
 import React from "react";
 import SwitchDisplay from "./_components/SwitchDisplay";
