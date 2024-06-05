@@ -31,8 +31,8 @@ function OrderPreview({
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-16 w-full">
-        <div className="w-1/3">
+      <div className="flex flex-col lg:flex-row gap-16 w-full">
+        <div className="w-full lg:w-1/3">
           <div className="flex items-center mb-4 w-full">
             <div className="space-x-2 flex">
               <h2 className="text-sm">Recommended</h2>
@@ -61,7 +61,7 @@ function OrderPreview({
             )}
           </div>
         </div>
-        <div className="w-1/3">
+        <div className="w-full lg:w-1/3">
           <div className="flex items-center mb-4 w-full">
             <div className="flex space-x-2 items-center">
               <h2 className="text-sm">Ongoing</h2>
@@ -94,7 +94,7 @@ function OrderPreview({
             )}
           </div>
         </div>
-        <div className="w-1/3">
+        <div className="w-full lg:w-1/3">
           <div className="flex mb-4 items-center">
             <div className="flex space-x-2 items-center">
               <h2 className="text-sm">Complete</h2>
