@@ -1,8 +1,7 @@
-"use server";
 import SearchElements from "./_components/SearchElement";
 import { taskSearch } from "@/lib/search";
 import DisplayTasks from "./_components/DisplayOrders";
-
+export const dynamic = "force-dynamic";
 export default async function Marketplace({
   params,
   searchParams,

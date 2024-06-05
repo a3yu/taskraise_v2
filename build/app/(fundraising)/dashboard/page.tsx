@@ -11,7 +11,7 @@ import {
   fetchAccount,
 } from "@/lib/stripe/stripe";
 import StripeOnboardingNotice from "../_components/StripeOnboardingNotice";
-
+export const dynamic = "force-dynamic";
 async function Dashboard() {
   const org = await getOrganizationData();
   if (!org.organizations) {

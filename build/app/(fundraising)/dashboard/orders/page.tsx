@@ -1,9 +1,8 @@
-"use server";
 import { getOrganizationData } from "@/lib/ordersAdmin";
 import React from "react";
 import SwitchDisplay from "./_components/SwitchDisplay";
 import { redirect } from "next/navigation";
-
+export const dynamic = "force-dynamic";
 async function Orders() {
   const org = await getOrganizationData();
   if (!org.organizations) {
