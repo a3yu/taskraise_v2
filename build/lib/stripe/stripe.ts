@@ -108,11 +108,13 @@ export async function fetchClientSecretAccount(account: string) {
 export async function transferToConnectedAccount(
   connectedAccountId: string,
   amount: number,
-  transactionId: number
+  transactionId: number,
+  intent: string
 ) {
   const transfer = await stripe.transfers.create({
     amount: formatAmountForStripe(amount, "usd"),
     currency: "usd",
+    source_transaction: intent,
     transfer_group: transactionId.toString(),
     destination: connectedAccountId,
   });

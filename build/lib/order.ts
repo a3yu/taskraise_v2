@@ -157,17 +157,25 @@ export async function orderComplete(
   orderObject: OrderCustomer
 ) {
   const supabase = createClient();
-  const response = await supabase
-    .from("orders")
-    .update({ status: "COMPLETED" })
-    .eq("id", order)
-    .select("*");
-  if (response.error) {
-    console.log(response.error);
-    throw Error("Error completing order");
+  if (!orderObject.transactions?.payment_intent) {
+    throw Error("No payment intent found");
   }
   try {
-    await transferToConnectedAccount(stripe_account, amount, transaction);
+    await transferToConnectedAccount(
+      stripe_account,
+      amount,
+      transaction,
+      orderObject.transactions.payment_intent
+    );
+    const response = await supabase
+      .from("orders")
+      .update({ status: "COMPLETED" })
+      .eq("id", order)
+      .select("*");
+    if (response.error) {
+      console.log(response.error);
+      throw Error("Error completing order");
+    }
   } catch (error) {
     throw Error("Error transferring funds");
   }
