@@ -72,12 +72,6 @@ export default function SideBar({ full_name }: { full_name: string | null }) {
         isActive: segments[1] === "orders",
         icon: <Folders width={18} />,
       },
-      {
-        name: "Settings",
-        href: "/dashboard/settings",
-        isActive: segments[1] === "organizations",
-        icon: <Settings width={18} />,
-      },
     ];
   }, [segments, fundraiser, organization]);
 

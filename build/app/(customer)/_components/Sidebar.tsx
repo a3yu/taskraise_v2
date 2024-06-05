@@ -66,12 +66,6 @@ export default function SideBar({
         isActive: segments.length === 1,
         icon: <Folders width={18} />,
       },
-      {
-        name: "Settings",
-        href: "/home/settings",
-        isActive: segments[1] === "settings",
-        icon: <Settings width={18} />,
-      },
     ];
   }, [segments, fundraiser, organization]);
 
