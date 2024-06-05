@@ -3,6 +3,9 @@ import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { orderPayedFor } from "@/lib/emails";
+import { Resend } from "resend";
+import { EmailTemplateOrderPayedFor } from "@/lib/emailTemplates";
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   const supabase = createAdminClient();
@@ -56,11 +59,18 @@ export async function POST(req: Request) {
     if (!data2.transactions?.organizations) {
       return new Response("Error fetching order", { status: 500 });
     }
-    await orderPayedFor(
-      data2.transactions?.organizations?.email,
-      data2.title,
-      data2.transactions?.organizations?.name
-    );
+    await resend.emails.send({
+      from: "Taskraise <system@taskraise.com>",
+      to: [data2.transactions?.organizations?.email],
+      subject: "Order Payed For",
+      react: EmailTemplateOrderPayedFor(
+        data2.title,
+        data2.transactions?.organizations?.name
+      ) as React.ReactElement,
+    });
+    if (error) {
+      throw Error("Could not send email");
+    }
     return new Response("Order inserted successfully", { status: 200 });
   }
   return new Response("No payment intent succeeded", { status: 200 });
