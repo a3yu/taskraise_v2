@@ -12,16 +12,15 @@ function OrderPreview({
   nearbyOrders: SearchResultOrders[];
 }) {
   // Filter transactions based on their status
-  const ongoingOrders = organizationTransactions
-    .filter(
-      (transaction) =>
-        transaction.orders?.status === "CLAIMED" ||
-        transaction.orders?.status === "ONGOING"
-    )
-    .slice(0, 2);
-  const completeOrders = organizationTransactions
-    .filter((transaction) => transaction.orders?.status === "COMPLETED")
-    .slice(0, 2);
+  const ongoingOrders = organizationTransactions.filter(
+    (transaction) =>
+      transaction.orders?.status === "CLAIMED" ||
+      transaction.orders?.status === "ONGOING"
+  );
+
+  const completeOrders = organizationTransactions.filter(
+    (transaction) => transaction.orders?.status === "COMPLETED"
+  );
 
   // Placeholder component
   const Placeholder = ({ text }: { text: string }) => (
@@ -81,13 +80,15 @@ function OrderPreview({
           </div>
           <div className="space-y-4">
             {ongoingOrders.length > 0 ? (
-              ongoingOrders.map((transaction) => (
-                <OrderCardTransaction
-                  key={transaction.id}
-                  variant="ongoing"
-                  transaction={transaction}
-                />
-              ))
+              ongoingOrders
+                .slice(0, 2)
+                .map((transaction) => (
+                  <OrderCardTransaction
+                    key={transaction.id}
+                    variant="ongoing"
+                    transaction={transaction}
+                  />
+                ))
             ) : (
               <Placeholder text="No ongoing orders" />
             )}
@@ -112,13 +113,15 @@ function OrderPreview({
           </div>
           <div className="space-y-4">
             {completeOrders.length > 0 ? (
-              completeOrders.map((transaction) => (
-                <OrderCardTransaction
-                  key={transaction.id}
-                  variant="completed"
-                  transaction={transaction}
-                />
-              ))
+              completeOrders
+                .slice(0, 2)
+                .map((transaction) => (
+                  <OrderCardTransaction
+                    key={transaction.id}
+                    variant="completed"
+                    transaction={transaction}
+                  />
+                ))
             ) : (
               <Placeholder text="No completed orders" />
             )}
