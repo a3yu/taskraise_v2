@@ -1,6 +1,3 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Toaster } from "@/components/ui/toaster";
 import SideBar from "./_components/Sidebar";
 import { getProfile } from "@/lib/auth";
 import { redirect } from "next/navigation";
